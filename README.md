@@ -1,7 +1,7 @@
 Wox.Plugin.Doc
 ==============
 
-<img src="http://ww3.sinaimg.cn/large/5d7c1fa4gw1eeoentizoyg20zk0m8npd.gif" />
+<img src="http://ww1.sinaimg.cn/large/5d7c1fa4gw1ecv3iu9d1ug20zk0m8ki7.gif" />
 
 How to download docs?
 =============
