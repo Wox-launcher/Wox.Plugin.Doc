@@ -46,14 +46,14 @@ namespace Wox.Plugin.Doc
                     results.AddRange(QuerySqllite(doc, query.ActionParameters[0]));
                 }
             }
-            
+
 
             return results;
         }
 
         public void Init(PluginInitContext context)
         {
-            docsetBasePath = Path.Combine(context.CurrentPluginMetadata.PluginDirecotry, @"Docset");
+            docsetBasePath = Path.Combine(context.CurrentPluginMetadata.PluginDirectory, @"Docset");
             if (!Directory.Exists(docsetBasePath))
                 Directory.CreateDirectory(docsetBasePath);
 
@@ -150,11 +150,11 @@ namespace Wox.Plugin.Doc
             string sql = string.Empty;
             if (type == "DASH")
             {
-                sql = "select * from searchIndex where name like '%{0}%' order by name asc, path asc limit 30";
+                sql = "select * from searchIndex where name like '%{0}%' order by name = '{0}' desc, name like '{0}%' desc limit 30";
             }
             if (type == "ZDASH")
             {
-                sql = @"select ztokenname as name, zpath as path from ztoken 
+                sql = @"select ztokenname as name, zpath as path from ztoken
 join ztokenmetainformation on ztoken.zmetainformation = ztokenmetainformation.z_pk
 join zfilepath on ztokenmetainformation.zfile = zfilepath.z_pk
 where (ztokenname like '%{0}%') order by lower(ztokenname) asc, zpath asc limit 30";
