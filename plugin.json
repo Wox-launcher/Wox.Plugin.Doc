@@ -7,5 +7,6 @@
     "Version":"1.0",
     "Language":"csharp",
     "Website":"https://github.com/qianlifeng/Wox.Plugin.Doc",
+	"IcoPath":"Images\\doc.png",
     "ExecuteFileName":"Wox.Plugin.Doc.dll"
 }
