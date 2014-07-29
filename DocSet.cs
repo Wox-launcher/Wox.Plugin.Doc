@@ -31,7 +31,7 @@ namespace Wox.Plugin.Doc
 
             foreach (string docPath in Directory.GetDirectories(docsetPath))
             {
-                string docName = Path.GetFileNameWithoutExtension(docPath);
+                string docName = Path.GetFileName(docPath);
                 string dbPath = Path.Combine(docPath, @"Contents\Resources\docSet.dsidx");
                 installedDocs.Add(new Doc
                     {
