@@ -38,31 +38,9 @@ namespace Wox.Plugin.Doc
                         Name = docName,
                         DBPath = dbPath,
                         DBType = CheckTableExists("searchIndex", dbPath) ? DocType.DASH : DocType.ZDASH,
-                        IconPath = GetDocIcon(docName, docPath)
+                        IconPath = pluginDirectory + "\\Images\\icons\\" + docName.Replace(" ", "_") + ".png"
                     });
             }
-        }
-
-        private string GetDocIcon(string name, string path)
-        {
-            string url = "https://raw.github.com/jkozera/zeal/master/zeal/icons/" + name.Replace(".docset", "").Replace(" ", "_") + ".png";
-            string imagePath = Path.Combine(path, "icon.png");
-            if (!File.Exists(imagePath))
-            {
-                HttpWebRequest lxRequest = (HttpWebRequest)WebRequest.Create(url);
-                using (HttpWebResponse lxResponse = (HttpWebResponse)lxRequest.GetResponse())
-                {
-                    using (BinaryReader reader = new BinaryReader(lxResponse.GetResponseStream()))
-                    {
-                        Byte[] lnByte = reader.ReadBytes(1 * 1024 * 1024 * 10);
-                        using (FileStream lxFS = new FileStream(imagePath, FileMode.Create))
-                        {
-                            lxFS.Write(lnByte, 0, lnByte.Length);
-                        }
-                    }
-                }
-            }
-            return imagePath;
         }
 
         private bool CheckTableExists(string table, string path)
@@ -110,7 +88,7 @@ namespace Wox.Plugin.Doc
                         Action = (c) =>
                             {
                                 string url = string.Format(@"{0}\{1}\Contents\Resources\Documents\{2}#{3}", docsetPath,
-                                                           doc.Name, docPath, name);
+                                                           doc.Name+".docset", docPath, name);
                                 string browser = GetDefaultBrowserPath();
                                 Process.Start(browser, String.Format("\"file:///{0}\"", url));
                                 return true;
