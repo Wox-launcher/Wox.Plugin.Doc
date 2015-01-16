@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using Microsoft.Win32;
+using System.Linq;
 
 namespace Wox.Plugin.Doc
 {
@@ -62,7 +63,7 @@ namespace Wox.Plugin.Doc
             {
                 results.AddRange(QuerySqllite(doc, query));
             }
-            return results;
+            return results.OrderBy(r => r.Title.Length).ToList();
         }
 
         private List<Result> QuerySqllite(Doc doc, string key)
@@ -123,7 +124,7 @@ namespace Wox.Plugin.Doc
                 sql = @"select ztokenname as name, zpath as path from ztoken
 join ztokenmetainformation on ztoken.zmetainformation = ztokenmetainformation.z_pk
 join zfilepath on ztokenmetainformation.zfile = zfilepath.z_pk
-where (ztokenname like '%{0}%') order by lower(ztokenname) asc, zpath asc limit 30";
+where (ztokenname like '%{0}%') order by length(ztokenname), lower(ztokenname) asc, zpath asc limit 30";
             }
 
             return sql;
